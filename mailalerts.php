@@ -172,8 +172,12 @@ class MailAlerts extends Module
 
 		if (Tools::isSubmit('submitMailAlert'))
 		{
-			if (!Configuration::updateValue('MA_CUSTOMER_QTY', (int)Tools::getValue('MA_CUSTOMER_QTY')))
+			if (
+				!Configuration::updateValue('MA_CUSTOMER_QTY', (int)Tools::getValue('MA_CUSTOMER_QTY')) ||
+				!Configuration::updateValue('MA_ORDER_EDIT', (int)Tools::getValue('MA_ORDER_EDIT'))
+			) {
 				$errors[] = $this->l('Cannot update settings');
+			}
 		}
 		else if (Tools::isSubmit('submitMAMerchant'))
 		{
