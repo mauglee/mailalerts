@@ -848,8 +848,13 @@ class MailAlerts extends Module
 	 */
 	public function hookActionOrderEdited($params)
 	{
-		if (!$this->order_edited || empty($this->order_edited))
+		if (
+			!$this->order_edited ||
+			empty($this->order_edited) ||
+			!Configuration::get('MA_ORDER_EDIT')
+		) {
 			return;
+		}
 
 		$order = $params['order'];
 
